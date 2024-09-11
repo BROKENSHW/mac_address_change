@@ -4,7 +4,7 @@
 </div>
 
 <div align="center">
-	<p>Script feito em **Python 3.12** para alterar o endereço do **MAC**</p>
+	<p>Script feito em <b>Python 3.12</b> para alterar o endereço do <b>MAC</b></p>
 </div>
 
 
