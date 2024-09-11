@@ -2,7 +2,6 @@
 <div align="center">
 	<h1>MAC Change Address</h1>
 </div>
-_______
 
 <div align="center">
 	<p>Script feito em **Python 3.12** para alterar o endereço do **MAC**</p>
