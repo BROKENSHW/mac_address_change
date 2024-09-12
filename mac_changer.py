@@ -1,34 +1,22 @@
 #!/usr/bin/env python
 import subprocess
+import optparse
 
-import subprocess
+parser = optparse.OptionParser()
+parser.add_option("-i", "--interface", dest="interface", help="Interface to change its MAC address")
+parser.add_option("-m", "--mac", dest="new_mac", help="New MAC address")
+(options, arguments) = parser.parse_args()
 
 # Nome da interface de rede
-interface = input("Interface: ")
+interface = options.interface
 # Usuario escolher o novo endereço MAC
-new_mac = input("New MAC Addres:")
+new_mac = options.new_mac
 
-# Executar o comando e capturar a saída
-result = subprocess.run(
-    ["ifconfig", interface],
-    stdout=subprocess.PIPE,
-    text=True
-)
-
-# Encontrar e extrair o endereço MAC
-output = result.stdout
-for line in output.splitlines():
-    if "ether" in line:
-        current_mac_address = line.split()[1]
-        break
-
-# Exibir o endereço MAC Atual
-print(f"[+] Your Current MAC Address: {current_mac_address}")
 # Mostrar a rede e o novo endereço mac que o usuario esta alterando
 print(f"[+] Changing MAC Address for {interface} to {new_mac}")
 
-subprocess.call(f"sudo -S ifconfig {interface} down", shell=True)
-subprocess.call(f"sudo -S ifconfig {interface} hw ether {new_mac}", shell=True)
-subprocess.call(f"sudo -S ifconfig {interface} up", shell=True)
+subprocess.call(["ifconfig", interface, "down"])
+subprocess.call(["ifconfig", interface, "hw", "ether", new_mac])
+subprocess.call(["ifconfig", interface, "up"])
 
 print(f"[+] MAC Change Successful")
