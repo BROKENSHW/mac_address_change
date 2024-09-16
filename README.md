@@ -15,7 +15,7 @@
 <div align="center">
 	
 <h2>Instalação</h2>
-```bash
+```shell
   git clone https://github.com/BROKENSHW/mac_address_change
 ```
 
@@ -26,8 +26,8 @@
 <h2>Uso/Exemplos</h2>
 
 ```shell
-    # Ajuda sobre os comandos disponíveis
-    ./mac_changer.py --help
+# Ajuda sobre os comandos disponíveis
+./mac_changer.py --help
 ```
 </div>
 
