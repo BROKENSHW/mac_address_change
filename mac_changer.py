@@ -1,22 +1,17 @@
 #!/usr/bin/env python
-import subprocess
-import optparse
+import defChangeMAC
+import defGetArguments
+import defGetCurrentMac
 
-parser = optparse.OptionParser()
-parser.add_option("-i", "--interface", dest="interface", help="Interface to change its MAC address")
-parser.add_option("-m", "--mac", dest="new_mac", help="New MAC address")
-(options, arguments) = parser.parse_args()
+options = defGetArguments.get_arguments()
 
-# Nome da interface de rede
-interface = options.interface
-# Usuario escolher o novo endereço MAC
-new_mac = options.new_mac
+current_mac = defGetCurrentMac.get_current_mac(options.interface)
+print(f"[+] Current MAC: {str(current_mac)}")
 
-# Mostrar a rede e o novo endereço mac que o usuario esta alterando
-print(f"[+] Changing MAC Address for {interface} to {new_mac}")
+defChangeMAC.change_mac(options.interface, options.new_mac)
 
-subprocess.call(["ifconfig", interface, "down"])
-subprocess.call(["ifconfig", interface, "hw", "ether", new_mac])
-subprocess.call(["ifconfig", interface, "up"])
-
-print(f"[+] MAC Change Successful")
+current_mac = defGetCurrentMac.get_current_mac(options.interface)
+if current_mac == options.new_mac:
+    print(f"[+] MAC Address was sucessfully changed to {current_mac} ")
+else:
+    print(f"[-] MAC Address did not get changed.")
